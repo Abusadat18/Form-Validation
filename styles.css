@@ -1,0 +1,73 @@
+@import url("https://fonts.googleapis.com/css2?family=Allura&family=Roboto&display=swap");
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+:root {
+  --PRIMARY-COLOR: #402b3a;
+  --SECONDARY-COLOR: #d63484;
+}
+
+body {
+  background-color: var(--PRIMARY-COLOR);
+  color: var(--SECONDARY-COLOR);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  font-family: "Roboto", sans-serif;
+  font-size: 20px;
+}
+
+.container {
+  border: 2px solid var(--SECONDARY-COLOR);
+  width: 400px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 20px;
+  gap: 15px;
+  border-radius: 10px;
+}
+
+.title {
+  font-family: "Allura", cursive;
+  font-size: 80px;
+}
+
+.userForm {
+  align-self: flex-start;
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  gap: 12px;
+}
+
+.userForm > div {
+  display: flex;
+  flex-direction: column;
+  gap: 3px;
+}
+
+.userForm > div > input {
+  padding: 3px;
+  border-radius: 5px;
+  border: none;
+}
+
+.userForm > div > input:active {
+  border: none;
+}
+
+.btn {
+  padding: 10px;
+  width: 120px;
+  border-radius: 5px;
+  border: 2px solid var(--SECONDARY-COLOR);
+  background-color: inherit;
+  color: inherit;
+  font-size: inherit;
+}
