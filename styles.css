@@ -71,3 +71,13 @@ body {
   color: inherit;
   font-size: inherit;
 }
+
+.emailError {
+  display: none;
+}
+
+.active {
+  font-size: 14px;
+  color: #f8f4ec;
+  display: block;
+}
