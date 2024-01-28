@@ -72,7 +72,8 @@ body {
   font-size: inherit;
 }
 
-.emailError {
+.emailError,
+.countryError {
   display: none;
 }
 
