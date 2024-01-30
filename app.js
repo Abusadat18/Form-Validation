@@ -94,6 +94,16 @@ password.addEventListener("input", () => {
     }
 })
 
+confirmPassword.addEventListener("input", () => {
+    const confirmPasswordError = document.querySelector(".confirmPasswordError");
+    if (isSamePassword() && confirmPassword.validity.valid) {
+        removeError(confirmPasswordError);
+    }
+    else {
+        showConfirmPasswordError(confirmPasswordError);
+    }
+})
+
 function removeError(element) {
     element.classList.remove("active");
 }
@@ -163,5 +173,24 @@ function showPasswordError(element) {
     }
     else if (password.validity.tooShort) {
         element.textContent = `*Password should be at least ${password.minLength} characters.`;
+    }
+}
+
+function isSamePassword(){
+    if (password.value === confirmPassword.value) {
+        return true;
+    }
+    else {
+        return false;
+    }
+}
+
+function showConfirmPasswordError(element) {
+    setActiveClass(element);
+    if (confirmPassword.validity.valueMissing) {
+        element.textContent = "*This field cannot be empty.";
+    }
+    else if (confirmPassword.value.length > 0) {
+        element.textContent = `*Password doesn't match`;
     }
 }
