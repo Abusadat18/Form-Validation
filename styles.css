@@ -73,7 +73,8 @@ body {
 }
 
 .emailError,
-.countryError {
+.countryError,
+.zipError {
   display: none;
 }
 

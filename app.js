@@ -1,5 +1,64 @@
 var country_list = ["Afghanistan","Albania","Algeria","Andorra","Angola","Anguilla","Antigua &amp; Barbuda","Argentina","Armenia","Aruba","Australia","Austria","Azerbaijan","Bahamas","Bahrain","Bangladesh","Barbados","Belarus","Belgium","Belize","Benin","Bermuda","Bhutan","Bolivia","Bosnia &amp; Herzegovina","Botswana","Brazil","British Virgin Islands","Brunei","Bulgaria","Burkina Faso","Burundi","Cambodia","Cameroon","Cape Verde","Cayman Islands","Chad","Chile","China","Colombia","Congo","Cook Islands","Costa Rica","Cote D Ivoire","Croatia","Cruise Ship","Cuba","Cyprus","Czech Republic","Denmark","Djibouti","Dominica","Dominican Republic","Ecuador","Egypt","El Salvador","Equatorial Guinea","Estonia","Ethiopia","Falkland Islands","Faroe Islands","Fiji","Finland","France","French Polynesia","French West Indies","Gabon","Gambia","Georgia","Germany","Ghana","Gibraltar","Greece","Greenland","Grenada","Guam","Guatemala","Guernsey","Guinea","Guinea Bissau","Guyana","Haiti","Honduras","Hong Kong","Hungary","Iceland","India","Indonesia","Iran","Iraq","Ireland","Isle of Man","Italy","Jamaica","Japan","Jersey","Jordan","Kazakhstan","Kenya","Kuwait","Kyrgyz Republic","Laos","Latvia","Lebanon","Lesotho","Liberia","Libya","Liechtenstein","Lithuania","Luxembourg","Macau","Macedonia","Madagascar","Malawi","Malaysia","Maldives","Mali","Malta","Mauritania","Mauritius","Mexico","Moldova","Monaco","Mongolia","Montenegro","Montserrat","Morocco","Mozambique","Namibia","Nepal","Netherlands","Netherlands Antilles","New Caledonia","New Zealand","Nicaragua","Niger","Nigeria","Norway","Oman","Pakistan","Palestine","Panama","Papua New Guinea","Paraguay","Peru","Philippines","Poland","Portugal","Puerto Rico","Qatar","Reunion","Romania","Russia","Rwanda","Saint Pierre &amp; Miquelon","Samoa","San Marino","Satellite","Saudi Arabia","Senegal","Serbia","Seychelles","Sierra Leone","Singapore","Slovakia","Slovenia","South Africa","South Korea","Spain","Sri Lanka","St Kitts &amp; Nevis","St Lucia","St Vincent","St. Lucia","Sudan","Suriname","Swaziland","Sweden","Switzerland","Syria","Taiwan","Tajikistan","Tanzania","Thailand","Timor L'Este","Togo","Tonga","Trinidad &amp; Tobago","Tunisia","Turkey","Turkmenistan","Turks &amp; Caicos","Uganda","Ukraine","United Arab Emirates","United Kingdom","Uruguay","Uzbekistan","Venezuela","Vietnam","Virgin Islands (US)","Yemen","Zambia","Zimbabwe"];
 
+const constraints = {
+    Switzerland: [
+      "^(CH-)?\\d{4}$",
+      "Switzerland ZIPs must have exactly 4 digits: e.g. CH-1950 or 1950",
+    ],
+    France: [
+      "^(F-)?\\d{5}$",
+      "France ZIPs must have exactly 5 digits: e.g. F-75012 or 75012",
+    ],
+    Germany: [
+      "^(D-)?\\d{5}$",
+      "Germany ZIPs must have exactly 5 digits: e.g. D-12345 or 12345",
+    ],
+    Netherland: [
+      "^(NL-)?\\d{4}\\s*([A-RT-Z][A-Z]|S[BCE-RT-Z])$",
+      "Netherland ZIPs must have exactly 4 digits, followed by 2 letters except SA, SD and SS",
+    ],
+    India: [
+      "^(IN-)?\\d{6}$",
+      "India ZIPs must have exactly 6 digits: e.g. IN-110001 or 110001",
+    ],
+    Pakistan: [
+      "^(PK-)?\\d{5}$",
+      "Pakistan ZIPs must have exactly 5 digits: e.g. PK-44000 or 44000",
+    ],
+    Palestine: [
+      "^(PS-)?\\d{5}$",
+      "Palestine ZIPs must have exactly 5 digits: e.g. PS-11111 or 11111",
+    ],
+    USA: [
+      "^(US-)?\\d{5}(-\\d{4})?$",
+      "US ZIPs must have 5 digits, optionally followed by a hyphen and 4 more digits: e.g. US-12345 or 12345-6789",
+    ],
+    UK: [
+      "^(GB-)?([A-Z]{1,2}\\d{1,2}[A-Z]?|\\d[A-Z]{2}) \\d[A-Z]{2}$",
+      "UK ZIPs must follow the pattern: e.g. GB-SW1A 1AA or SW1A 1AA",
+    ],
+    Bangladesh: [
+      "^(BD-)?\\d{4}$",
+      "Bangladesh ZIPs must have exactly 4 digits: e.g. BD-1205 or 1205",
+    ],
+    lk: [
+      "^(LK-)?\\d{5}$",
+      "Sri Lanka ZIPs must have exactly 5 digits: e.g. LK-20000 or 20000",
+    ],
+    sa: [
+      "^(SA-)?\\d{5}$",
+      "Saudi Arabia ZIPs must have exactly 5 digits: e.g. SA-11564 or 11564",
+    ],
+    qa: [
+      "^(QA-)?\\d{5}$",
+      "Qatar ZIPs must have exactly 5 digits: e.g. QA-12345 or 12345",
+    ],
+    ae: [
+      "^(AE-)?\\d{5}$",
+      "UAE ZIPs must have exactly 5 digits: e.g. AE-12345 or 12345",
+    ],
+  };
+
 const btn = document.querySelector(".btn");
 const container = document.querySelector(".container");
 const name = document.getElementById("userName");
@@ -35,6 +94,17 @@ country.addEventListener("input", () => {
         removeError(countryError);
     } else {
         showCountryError(countryError);
+    }
+})
+
+zipCode.addEventListener("input", () => {
+    const zipError = document.querySelector(".zipError");
+    if (isCountryPresent(country.value)) {
+        checkZipError(zipError);
+    }
+    else {
+        setActiveClass(zipError);
+        zipError.textContent = "Please enter a valid country name in previous input";
     }
 })
 
@@ -74,5 +144,15 @@ function showCountryError(element) {
 
 function isCountryPresent(name) {
     return country_list.includes(name);
+}
+
+function checkZipError(element) {
+    const zipPattern = new RegExp(constraints[country.value][0]);
+    if (!zipPattern.test(zipCode.value)) {
+        setActiveClass(element);
+        element.textContent = constraints[country.value][1];
+    } else {
+        removeError(element);
+    }
 }
  
