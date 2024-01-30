@@ -84,6 +84,16 @@ zipCode.addEventListener("input", () => {
     }
 })
 
+password.addEventListener("input", () => {
+    const passwordError = document.querySelector(".passwordError");
+    if (password.validity.valid) {
+        removeError(passwordError);
+    }
+    else {
+        showPasswordError(passwordError);
+    }
+})
+
 function removeError(element) {
     element.classList.remove("active");
 }
@@ -143,5 +153,15 @@ function getCountryCode(name) {
         case "Pakistan": return "pk";
         case "Bangladesh": return "bd";
         case "Palestine": return "ps";
+    }
+}
+
+function showPasswordError(element) {
+    setActiveClass(element);
+    if (password.validity.valueMissing) {
+        element.textContent = "*Password cannot be empty.";
+    }
+    else if (password.validity.tooShort) {
+        element.textContent = `*Password should be at least ${password.minLength} characters.`;
     }
 }
