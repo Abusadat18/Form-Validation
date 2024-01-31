@@ -209,5 +209,29 @@ function showConfirmPasswordError(element) {
     }
 }
 
+btn.addEventListener("click", () => {
+    console.log(btn);
+    console.log(isEmptyAnyField());
+    if (userForm.checkValidity() && isSamePassword()) {
+        btn.setCustomValidity("");
+        displaySuccess(container);
+    }
+    else if (isEmptyAnyField()) {
+        btn.setCustomValidity("All the fields are mandatory");
+    }
+    else {
+        btn.setCustomValidity("Fill all the fields correctly");
+    }
+    btn.reportValidity();
+})
 
+function isEmptyAnyField() {
+    const formFields = userForm.querySelectorAll("input");
+    for (let i = 0; i < formFields.length; i++){
+        if (formFields[i].validity.valueMissing) {
+            return true;
+        }
+    }
+    return false;
+}
 
