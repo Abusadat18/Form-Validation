@@ -13,7 +13,8 @@
       <form class="userForm">
         <div>
           <label for="userName">Name</label>
-          <input type="text" id="userName" />
+          <input type="text" id="userName" required />
+          <span class="nameError"></span>
         </div>
         <div>
           <label for="userEmail">Email</label>
@@ -41,7 +42,7 @@
           <span class="confirmPasswordError"></span>
         </div>
       </form>
-      <button type="button" class="btn">Submit</button>
+      <button type="submit" class="btn">Submit</button>
     </div>
   </body>
 </html>

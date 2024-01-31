@@ -78,6 +78,7 @@ body {
   color: var(--PRIMARY-COLOR);
 }
 
+.nameError,
 .emailError,
 .countryError,
 .zipError,

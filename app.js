@@ -52,6 +52,16 @@ function displaySuccess(element) {
     `
 }
 
+name.addEventListener("input", () => {
+    const nameError = document.querySelector(".nameError");
+    if (name.validity.valid) {
+        removeError(nameError);
+    }
+    else {
+        showNameError(nameError);
+    }
+})
+
 email.addEventListener("input", () => {
     const emailError = document.querySelector(".emailError");
     if (email.validity.valid) {
@@ -107,6 +117,13 @@ function removeError(element) {
 
 function setActiveClass(element) {
     element.classList.add("active");
+}
+
+function showNameError(element) {
+    setActiveClass(element);
+    if (name.validity.valueMissing) {
+        element.textContent = "*Name cannot be empty";
+    }
 }
 
 function showEmailError(element) {
@@ -192,14 +209,5 @@ function showConfirmPasswordError(element) {
     }
 }
 
-btn.addEventListener("click", () => {
-    console.log(btn);
-    if (userForm.checkValidity()) {
-        btn.setCustomValidity("");
-        displaySuccess(container);
-    }
-    else {
-         btn.setCustomValidity("Fill all the fields correctly");
-    }
-})
+
 
