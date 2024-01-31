@@ -55,9 +55,11 @@ function displaySuccess(element) {
 name.addEventListener("input", () => {
     const nameError = document.querySelector(".nameError");
     if (name.validity.valid) {
+        setValidClass(name);
         removeError(nameError);
     }
     else {
+        setInvalidClass(name);
         showNameError(nameError);
     }
 })
@@ -65,8 +67,10 @@ name.addEventListener("input", () => {
 email.addEventListener("input", () => {
     const emailError = document.querySelector(".emailError");
     if (email.validity.valid) {
+        setValidClass(email);
         removeError(emailError);
     } else {
+        setInvalidClass(email);
         showEmailError(emailError);
     }
 })
@@ -74,8 +78,10 @@ email.addEventListener("input", () => {
 country.addEventListener("input", () => {
     const countryError = document.querySelector(".countryError");
     if (country.validity.valid && isCountryPresent(country.value)) {
+        setValidClass(country);
         removeError(countryError);
     } else {
+        setInvalidClass(country);
         showCountryError(countryError);
     }
 })
@@ -86,6 +92,7 @@ zipCode.addEventListener("input", () => {
         checkZipError(zipError);
     }
     else {
+        setInvalidClass(zipCode);
         setActiveClass(zipError);
         zipError.textContent = "Please enter a valid country name in previous input";
     }
@@ -94,9 +101,11 @@ zipCode.addEventListener("input", () => {
 password.addEventListener("input", () => {
     const passwordError = document.querySelector(".passwordError");
     if (password.validity.valid) {
+        setValidClass(password);
         removeError(passwordError);
     }
     else {
+        setInvalidClass(password);
         showPasswordError(passwordError);
     }
 })
@@ -104,9 +113,11 @@ password.addEventListener("input", () => {
 confirmPassword.addEventListener("input", () => {
     const confirmPasswordError = document.querySelector(".confirmPasswordError");
     if (isSamePassword() && confirmPassword.validity.valid) {
+        setValidClass(confirmPassword);
         removeError(confirmPasswordError);
     }
     else {
+        setInvalidClass(confirmPassword);
         showConfirmPasswordError(confirmPasswordError);
     }
 })
@@ -160,9 +171,11 @@ function checkZipError(element) {
     const countryCode = getCountryCode(country.value);
     const zipPattern = new RegExp(constraints[countryCode][0]);
     if (!zipPattern.test(zipCode.value)) {
+        setInvalidClass(zipCode);
         setActiveClass(element);
         element.textContent = constraints[countryCode][1];
     } else {
+        setValidClass(zipCode);
         removeError(element);
     }
 }
@@ -235,3 +248,12 @@ function isEmptyAnyField() {
     return false;
 }
 
+function setValidClass(element){
+    element.classList.remove("invalidd");
+    element.classList.add("validd");
+}
+
+function setInvalidClass(element){
+    element.classList.remove("validd");
+    element.classList.add("invalidd");
+}
