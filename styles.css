@@ -70,6 +70,12 @@ body {
   background-color: inherit;
   color: inherit;
   font-size: inherit;
+  cursor: pointer;
+}
+
+.btn:hover {
+  background-color: var(--SECONDARY-COLOR);
+  color: var(--PRIMARY-COLOR);
 }
 
 .emailError,

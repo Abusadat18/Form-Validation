@@ -35,7 +35,7 @@ const constraints = {
     ],
   };
 
-const btn = document.querySelector(".btn");
+const userForm = document.querySelector(".userForm");
 const container = document.querySelector(".container");
 const name = document.getElementById("userName");
 const email = document.getElementById("userEmail");
@@ -43,6 +43,7 @@ const country = document.getElementById("userCountry");
 const zipCode = document.getElementById("zipCode");
 const password = document.getElementById("userPassword");
 const confirmPassword = document.getElementById("confirmPassword");
+const btn = document.querySelector(".btn");
 
 function displaySuccess(element) {
     element.innerHTML = `
@@ -50,10 +51,6 @@ function displaySuccess(element) {
         <h3>Account Created</h3>
     `
 }
-
-btn.addEventListener("click", () => {
-    displaySuccess(container);
-})
 
 email.addEventListener("input", () => {
     const emailError = document.querySelector(".emailError");
@@ -194,3 +191,15 @@ function showConfirmPasswordError(element) {
         element.textContent = `*Password doesn't match`;
     }
 }
+
+btn.addEventListener("click", () => {
+    console.log(btn);
+    if (userForm.checkValidity()) {
+        btn.setCustomValidity("");
+        displaySuccess(container);
+    }
+    else {
+         btn.setCustomValidity("Fill all the fields correctly");
+    }
+})
+
